@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            animation: rainbowBackground 10s infinite; /* Added animation */
+        }
+
+        .header, .footer {
+            background: #34495e;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .slider {
+            width: 80%;
+            max-width: 700px;
+            height: 300px;
+            position: relative;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            width: 500%;
+            height: 100%;
+            display: flex;
+        }
+
+        .slides input {
+            display: none;
+        }
+
+        .slide {
+            width: 20%;
+            transition: 2s;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .navigation-manual {
+            position: absolute;
+            width: 100%;
+            margin-top: -40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .manual-btn {
+            border: 2px solid #ffffff;
+            padding: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 1s;
+        }
+
+        .manual-btn:not(:last-child) {
+            margin-right: 40px;
+        }
+
+        .manual-btn:hover {
+            background: #ffffff;
+        }
+
+        #radio1:checked ~ .first {
+            margin-left: 0;
+        }
+
+        #radio2:checked ~ .first {
+            margin-left: -20%;
+        }
+
+        #radio3:checked ~ .first {
+            margin-left: -40%;
+        }
+
+        #radio4:checked ~ .first {
+            margin-left: -60%;
+        }
+
+        .navigation-auto {
+            position: absolute;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            margin-top: -70px;
+        }
+
+        .navigation-auto div {
+            border: 2px solid #ffffff;
+            padding: 5px;
+            border-radius: 10px;
+            transition: 1s;
+        }
+
+        .navigation-auto div:not(:last-child) {
+            margin-right: 40px;
+        }
+
+        .navigation-auto .auto-btn1 {
+            animation: autoSlide1 10s infinite;
+        }
+
+        .navigation-auto .auto-btn2 {
+            animation: autoSlide2 10s infinite;
+        }
+
+        .navigation-auto .auto-btn3 {
+            animation: autoSlide3 10s infinite;
+        }
+
+        .navigation-auto .auto-btn4 {
+            animation: autoSlide4 10s infinite;
+        }
+
+        @keyframes autoSlide1 {
+            0%, 25% { background: #ffffff; }
+            26%, 100% { background: transparent; }
+        }
+
+        @keyframes autoSlide2 {
+            25%, 50% { background: #ffffff; }
+            51%, 100% { background: transparent; }
+        }
+
+        @keyframes autoSlide3 {
+            50%, 75% { background: #ffffff; }
+            76%, 100% { background: transparent; }
+        }
+
+        @keyframes autoSlide4 {
+            75%, 100% { background: #ffffff; }
+        }
+
+        @keyframes rainbowBackground {
+            0% { background-color: #ff0000; }
+            14% { background-color: #ff7f00; }
+            28% { background-color: #ffff00; }
+            42% { background-color: #00ff00; }
+            57% { background-color: #00ffff; }
+            71% { background-color: #0000ff; }
+            85% { background-color: #7f00ff; }
+            100% { background-color: #ff0000; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        FF TEAM-SQUAD
+    </div>
+
+    <div class="slider">
+        <div class="slides">
+            <input type="radio" name="radio-btn" id="radio1">
+            <input type="radio" name="radio-btn" id="radio2">
+            <input type="radio" name="radio-btn" id="radio3">
+            <input type="radio" name="radio-btn" id="radio4">
+
+            <div class="slide first">
+                <img src="https://res.cloudinary.com/dl8dmkhmv/image/upload/v1723636008/IMG_20240814_171441_fkk6qs.jpg" alt="Image 1">
+            </div>
+            <div class="slide">
+                <img src="https://res.cloudinary.com/dl8dmkhmv/image/upload/v1723779007/IMG_20240816_085929_hiv6bo.jpg" alt="Image 2">
+            </div>
+            <div class="slide">
+                <img src="https://res.cloudinary.com/dl8dmkhmv/image/upload/v1723779006/IMG_20240816_085916_humnqf.jpg" alt="Image 3">
+            </div>
+            <div class="slide">
+                <img src="https://res.cloudinary.com/dl8dmkhmv/image/upload/v1723779007/IMG_20240816_085944_whfica.jpg" alt="Image 4">
+            </div>
+
+            <!-- Navigation auto -->
+            <div class="navigation-auto">
+                <div class="auto-btn1"></div>
+                <div class="auto-btn2"></div>
+                <div class="auto-btn3"></div>
+                <div class="auto-btn4"></div>
+            </div>
+        </div>
+
+        <!-- Navigation manual -->
+        <div class="navigation-manual">
+            <label for="radio1" class="manual-btn"></label>
+            <label for="radio2" class="manual-btn"></label>
+            <label for="radio3" class="manual-btn"></label>
+            <label for="radio4" class="manual-btn"></label>
+        </div>
+    </div>
+
+    <div class="footer">
+        TEAMBIMO
+    </div>
+    <marquee>
+        The page updated soon
+    </marquee>
+    <script>
+        let counter = 1;
+        setInterval(function(){
+            document.getElementById('radio' + counter).checked = true;
+            counter++;
+            if(counter > 4){
+                counter = 1;
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
